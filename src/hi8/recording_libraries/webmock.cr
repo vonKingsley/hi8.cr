@@ -36,7 +36,7 @@ module HI8
         res_body    = response.body
         res_headers = headers_from_hash(response.headers)
 
-        if req_body == ""
+        if req_body.empty?
           ::WebMock.stub(method, url)
             .with(headers: req_headers, query: req_query)
             .to_return(status: res_status, body: res_body, headers: res_headers)
