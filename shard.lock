@@ -1,0 +1,6 @@
+version: 1.0
+shards:
+  webmock:
+    github: vonkingsley/webmock.cr
+    commit: 46b856dfab67645f99a7e864e3aa600ed17c38b3
+
