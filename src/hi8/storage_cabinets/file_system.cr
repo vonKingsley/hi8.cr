@@ -7,7 +7,7 @@ module HI8
       getter storage_location : String
 
       def initialize
-        @storage_location = ""
+        @storage_location = HI8.configuration.cassette_library_dir
       end
 
       def storage_location=(dir)

@@ -28,7 +28,7 @@ module HI8
       def playback_episode(request, response)
         uri = uri_parse(request.uri)
         method      = request.method
-        url         = "#{uri.scheme}://#{uri.host}#{uri.path}"
+        url         = url_builder(uri)
         req_body    = request.body
         req_headers = headers_from_hash(request.headers)
         req_query   = HTTP::Params.try(&.parse(uri.query.to_s)).to_h
@@ -47,6 +47,20 @@ module HI8
         end
       end
 
+      private def uri_parse(resource)
+        URI.parse(resource)
+      end
+
+      private def url_builder(uri)
+        String.build do |str|
+          str << uri.scheme
+          str << "://"
+          str << uri.host
+          str << ":" + uri.port.to_s if uri.port
+          str << uri.path
+        end
+      end
+
       def headers_from_hash(headers)
         header = HTTP::Headers.new
         return header if headers.nil?
@@ -55,10 +69,6 @@ module HI8
           header.add(key.as(String), val.as(String))
         end
         header
-      end
-
-      def uri_parse(resource)
-        URI.parse(resource)
       end
 
       ::WebMock.callbacks.add do
