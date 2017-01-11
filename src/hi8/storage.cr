@@ -4,7 +4,6 @@ module HI8
   # Keeps track of the cassette cabinets
   # put new cabinets in the cabinets directory
   class Storage(Cabinet)
-
     getter cabinets
 
     def initialize
@@ -20,8 +19,8 @@ module HI8
       @cabinets.fetch(name) do
         @cabinets[name] = case name
                           when :file_system then HI8::Cabinet::FileSystem.new
-                          else raise "The requested HI8 cassette cabinet " +
-                           "(#{name.inspect}) is not registered."
+                          else                   raise "The requested HI8 cassette cabinet " +
+                                     "(#{name.inspect}) is not registered."
                           end
       end
     end
@@ -33,7 +32,7 @@ module HI8
     def []=(name, value)
       if @cabinets.has_key?(name)
         puts "WARNING: There is already a HI8 cassette shelf " +
-          "registered for #{name.inspect}. Overriding it."
+             "registered for #{name.inspect}. Overriding it."
       end
 
       @cabinets[name] = value

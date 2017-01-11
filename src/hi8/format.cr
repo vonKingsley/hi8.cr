@@ -2,7 +2,6 @@ require "./formatters/formatter"
 
 module HI8
   class Format(Formatter)
-
     getter formatters
 
     def initialize
@@ -14,7 +13,7 @@ module HI8
         @formatters[name] = case name
                             when :yaml then HI8::Formatter::YAML.new
                             when :json then HI8::Formatter::JSON.new
-                            else raise "The requested VCR formatter #{name.to_s} is not registerd."
+                            else            raise "The requested VCR formatter #{name.to_s} is not registerd."
                             end
       end
     end

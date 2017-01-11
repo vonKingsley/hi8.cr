@@ -2,5 +2,5 @@ version: 1.0
 shards:
   webmock:
     github: vonkingsley/webmock.cr
-    commit: 46b856dfab67645f99a7e864e3aa600ed17c38b3
+    commit: 93e1fce1ff5f751b8d623faa5141e66422829b78
 

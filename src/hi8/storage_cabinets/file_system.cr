@@ -1,7 +1,6 @@
 module HI8
   module Cabinet
     class FileSystem
-
       include Cabinet
 
       getter storage_location : String

@@ -27,23 +27,23 @@ module HI8
 
       def playback_episode(request, response)
         uri = uri_parse(request.uri)
-        method      = request.method
-        url         = url_builder(uri)
-        req_body    = request.body
+        method = request.method
+        url = url_builder(uri)
+        req_body = request.body
         req_headers = headers_from_hash(request.headers)
-        req_query   = HTTP::Params.try(&.parse(uri.query.to_s)).to_h
-        res_status  = response.status.to_i
-        res_body    = response.body
+        req_query = HTTP::Params.try(&.parse(uri.query.to_s)).to_h
+        res_status = response.status.to_i
+        res_body = response.body
         res_headers = headers_from_hash(response.headers)
 
         if req_body.empty?
           ::WebMock.stub(method, url)
-            .with(headers: req_headers, query: req_query)
-            .to_return(status: res_status, body: res_body, headers: res_headers)
+                   .with(headers: req_headers, query: req_query)
+                   .to_return(status: res_status, body: res_body, headers: res_headers)
         else
           ::WebMock.stub(method, url)
-            .with(headers: req_headers, body: req_body, query: req_query)
-            .to_return(status: res_status, body: res_body, headers: res_headers)
+                   .with(headers: req_headers, body: req_body, query: req_query)
+                   .to_return(status: res_status, body: res_body, headers: res_headers)
         end
       end
 
@@ -73,7 +73,7 @@ module HI8
 
       ::WebMock.callbacks.add do
         after_live_request do |request, response|
-          episode = HI8::Episode.new(request,response)
+          episode = HI8::Episode.new(request, response)
           HI8.record_to_cassette(episode)
         end
       end

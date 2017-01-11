@@ -1,10 +1,9 @@
-#An episode is a recorded http interaction
-#we create a request and response in a hash
-#these are later formatted into the format 
-#selected in the config.
+# An episode is a recorded http interaction
+# we create a request and response in a hash
+# these are later formatted into the format
+# selected in the config.
 module HI8
   module HTTPHelpers
-
     def header_params(headers)
       header_hash = {} of String => String
       headers.each do |key, val|
@@ -18,8 +17,7 @@ module HI8
     end
   end
 
- class Episode
-
+  class Episode
     def initialize(request : HTTP::Request, response : HTTP::Client::Response)
       @request = Request.new(request)
       @response = Response.new(response)
@@ -27,8 +25,8 @@ module HI8
 
     def to_hash
       {
-        :request => @request.to_hash,
-        :response => @response.to_hash
+        :request  => @request.to_hash,
+        :response => @response.to_hash,
       } of Symbol => Hash(Symbol, String | Hash(String, String))
     end
 
@@ -45,10 +43,10 @@ module HI8
 
     def to_hash
       {
-        :method => @request.method.to_s,
-        :uri => uri_creator(uri_from_header.to_s, @request.resource.to_s),
-        :body => @request.body.to_s,
-        :headers => header_params(@request.headers)
+        :method  => @request.method.to_s,
+        :uri     => uri_creator(uri_from_header.to_s, @request.resource.to_s),
+        :body    => @request.body.to_s,
+        :headers => header_params(@request.headers),
       } of Symbol => String | Hash(String, String)
     end
 
@@ -65,12 +63,11 @@ module HI8
 
     def to_hash
       {
-        :status => @response.status_code.to_s,
-        :headers => header_params(@response.headers),
-        :body => @response.body.to_s,
-        :http_version => @response.version
+        :status       => @response.status_code.to_s,
+        :headers      => header_params(@response.headers),
+        :body         => @response.body.to_s,
+        :http_version => @response.version,
       } of Symbol => String | Hash(String, String)
     end
   end
-
 end

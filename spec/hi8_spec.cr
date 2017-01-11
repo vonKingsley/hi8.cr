@@ -11,7 +11,6 @@ Spec.after_each do
 end
 
 describe HI8 do
-
   it "takes a configuration block" do
     HI8.configure do |config|
       config.cassette_library_dir = "./test_dir/cassettes"
@@ -88,5 +87,4 @@ describe HI8 do
     HI8.recorders.should be_a HI8::Recorder(HI8::Library)
     HI8.recorders.libraries.has_key?(:webmock).should be_true
   end
-
 end

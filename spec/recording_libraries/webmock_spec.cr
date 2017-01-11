@@ -3,7 +3,6 @@ def recording_lib
 end
 
 describe HI8::Library::WebMock do
-
   it ".record sets allows_net_connect to true" do
     recording_lib.record
     ::WebMock.allows_net_connect?.should be_true

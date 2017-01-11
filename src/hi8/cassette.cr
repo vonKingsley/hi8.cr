@@ -1,6 +1,5 @@
 module HI8
   class Cassette
-
     # The supported record modes.
     #
     #   * :all -- Record every HTTP interactions; do not play any back.
@@ -10,9 +9,9 @@ module HI8
     #              otherwise, playback the HTTP interactions.
     VALID_RECORD_MODES = [:all, :none, :new_episodes, :once]
 
-    @options  : Hash(Symbol, Symbol)
-    @storage  : HI8::Cabinet
-    @format   : HI8::Formatter
+    @options : Hash(Symbol, Symbol)
+    @storage : HI8::Cabinet
+    @format : HI8::Formatter
     @recorder : HI8::Library
     @record_mode : Symbol
 
@@ -22,11 +21,11 @@ module HI8
 
     getter recorder, format, storage
 
-    def initialize( @name : String, options : Hash? = nil )
+    def initialize(@name : String, options : Hash? = nil)
       @options = HI8.configuration.default_cassette_options
       @options.merge!(options) if options
       @record_mode = @options[:record_mode]
-      @format  = HI8.formats[@options[:format_with]]
+      @format = HI8.formats[@options[:format_with]]
       @storage = HI8.storage[@options[:store_with]]
       @recorder = HI8.recorders[@options[:record_with]]
       set_record_or_playback
@@ -48,8 +47,8 @@ module HI8
 
     def formatter_hash
       {
-        :episodes => episodes_to_record.map(&.to_hash),
-        :recorded_with => "HI8.CR #{HI8.version}"
+        :episodes      => episodes_to_record.map(&.to_hash),
+        :recorded_with => "HI8.CR #{HI8.version}",
       } of Symbol => String | Array(Hash(Symbol, Hash(Symbol, String | Hash(String, String))))
     end
 

@@ -3,7 +3,7 @@ require "./hi8/*"
 module HI8
   extend self
 
-  #The main configuration block
+  # The main configuration block
   def configure
     yield configuration
   end
@@ -30,14 +30,14 @@ module HI8
   end
 
   def insert_cassette(name, options)
-    #if turned_on?
+    # if turned_on?
     #  if cassettes.any? {|c| c.name = name }
     #    raise ArgumentError.new("The cassette #{name} already exisits")
     #  end
 
-      cassette = Cassette.new(name, options)
-      cassettes << cassette
-    #end
+    cassette = Cassette.new(name, options)
+    cassettes << cassette
+    # end
   end
 
   def eject_cassette

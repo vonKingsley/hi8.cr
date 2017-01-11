@@ -1,5 +1,4 @@
 describe HI8::Configuration do
-
   it "has a default library dir" do
     HI8::Configuration.new.cassette_library_dir.should eq "./fixtures/cassettes"
   end
