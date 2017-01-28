@@ -17,7 +17,7 @@ add a timer class to manage replays and replay intervals.
 ```yaml
 development_dependencies:
   hi8:
-    github: vonkingsley/hi8
+    github: vonkingsley/hi8.cr
 ```
 
 
