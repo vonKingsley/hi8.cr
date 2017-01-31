@@ -43,6 +43,12 @@ HI8.configure do |config|
 end
 ```
 
+###Usage
+```crystal
+HI8.use_cassette("cassette_name") do 
+  ...
+end
+```
 ## Development
 I probably take the whole Cassette emulation a little to far, but its fun.  
 We have **Cassettes** which manage the playback and recording of episodes.  
