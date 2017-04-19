@@ -37,7 +37,6 @@ module HI8
 
     cassette = Cassette.new(name, options)
     cassettes << cassette
-    # end
   end
 
   def eject_cassette

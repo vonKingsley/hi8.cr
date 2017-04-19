@@ -2,7 +2,9 @@ require "./storage_cabinets/cabinet"
 
 module HI8
   # Keeps track of the cassette cabinets
-  # put new cabinets in the cabinets directory
+  # Cabinets are where the cassettes are stored
+  # this defaults to the file system
+  # Put your new cabinets in the cabinets directory
   class Storage(Cabinet)
     getter cabinets
 
@@ -19,7 +21,8 @@ module HI8
       @cabinets.fetch(name) do
         @cabinets[name] = case name
                           when :file_system then HI8::Cabinet::FileSystem.new
-                          else                   raise "The requested HI8 cassette cabinet " +
+                          else
+                            raise "The requested HI8 cassette cabinet " +
                                      "(#{name.inspect}) is not registered."
                           end
       end
