@@ -1,5 +1,5 @@
 # hi8.cr
-#HTTP Interaction -8- Crystal Recorder
+# HTTP Interaction -8- Crystal Recorder
 
 A Crystal version of the Ruby HTTP interaction library [vcr](https://github.com/vcr/vcr).
 Record your test suite's HTTP interactions and replay them during future
@@ -22,8 +22,8 @@ development_dependencies:
 
 
 ## Usage
-###Options for each Cassette
-cassette options are a Hash(Symbol, Symbol)
+### Options for each Cassette
+Cassette options are a Hash(Symbol, Symbol)
 you can pass the options in the HI8.use_cassette call
 
 defaults are:  
@@ -36,14 +36,14 @@ defaults are:
 }
 ```
 
-###Configure HI8
+### Configure HI8
 ```crystal
 HI8.configure do |config|
   config.cassette_library_dir = "./test_dir/cassettes"
 end
 ```
 
-###Usage
+### Usage
 ```crystal
 HI8.use_cassette("cassette_name") do 
   ...
@@ -77,5 +77,5 @@ support [WebMock](https://github.com/manastech/webmock.cr)
 
 - [vonkingsley](https://github.com/vonkingsley) Kingsley Lewis - creator, maintainer
 
-##Kudos
+## Kudos
 Myron Marston and all the [contributers](https://github.com/vcr/vcr#credits) of the original VCR
