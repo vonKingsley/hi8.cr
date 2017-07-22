@@ -22,11 +22,18 @@ development_dependencies:
 
 
 ## Usage
+### Configure HI8
+```crystal
+HI8.configure do |config|
+  config.cassette_library_dir = "./test_dir/cassettes"
+end
+```
+
 ### Options for each Cassette
 Cassette options are a Hash(Symbol, Symbol)
 you can pass the options in the HI8.use_cassette call
 
-defaults are:  
+defaults are:
 ```crystal
 {
   :record_mode => :once,
@@ -36,30 +43,23 @@ defaults are:
 }
 ```
 
-### Configure HI8
-```crystal
-HI8.configure do |config|
-  config.cassette_library_dir = "./test_dir/cassettes"
-end
-```
-
 ### Usage
 ```crystal
-HI8.use_cassette("cassette_name") do 
+HI8.use_cassette("cassette_name") do
   ...
 end
 ```
 ## Development
-I probably take the whole Cassette emulation a little to far, but its fun.  
-We have **Cassettes** which manage the playback and recording of episodes.  
+I probably take the whole Cassette emulation a little to far, but its fun.
+We have **Cassettes** which manage the playback and recording of episodes.
 
-An **Episode** is an http interaction.  
+An **Episode** is an http interaction.
 
 **StorageCabinets** are where the cassettes are stored.  Currently we only
-have the file system.  
+have the file system.
 
 **Formats** are how the episode is stored on in the StorageCabinet.
-Currently we support YAML && JSON.  
+Currently we support YAML && JSON.
 
 **RecordingLibaries** are the Mocking libraries. Currently we only
 support [WebMock](https://github.com/manastech/webmock.cr)
