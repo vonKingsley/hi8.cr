@@ -3,12 +3,12 @@ episodes:
 - request:
     method: GET
     uri: http://www.example.net/
-    body: 
+    body: ""
     headers:
       Host: www.example.net
       User-agent: Crystal
   response:
-    status: 200
+    status: "200"
     headers:
       Cache-Control: max-age=604800
       Content-Type: text/html
@@ -19,8 +19,8 @@ episodes:
       Server: ECS (sjc/4F91)
       Vary: Accept-Encoding
       X-Cache: HIT
-      x-ec-custom-error: 1
-      Content-Length: 1270
+      x-ec-custom-error: "1"
+      Content-Length: "1270"
     body: "<!doctype html>\n<html>\n<head>\n    <title>Example Domain</title>\n\n
       \   <meta charset=\"utf-8\" />\n    <meta http-equiv=\"Content-type\" content=\"text/html;
       charset=utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width,
@@ -42,12 +42,12 @@ episodes:
 - request:
     method: GET
     uri: http://google.com/
-    body: 
+    body: ""
     headers:
       Host: google.com
       User-agent: Crystal
   response:
-    status: 301
+    status: "301"
     headers:
       Location: http://www.google.com/
       Content-Type: text/html; charset=UTF-8
@@ -55,10 +55,10 @@ episodes:
       Expires: Fri, 16 Dec 2016 03:16:34 GMT
       Cache-Control: public, max-age=2592000
       Server: gws
-      Content-Length: 219
+      Content-Length: "219"
       X-XSS-Protection: 1; mode=block
       X-Frame-Options: SAMEORIGIN
     body: "<HTML><HEAD><meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<TITLE>301
       Moved</TITLE></HEAD><BODY>\n<H1>301 Moved</H1>\nThe document has moved\n<A HREF=\"http://www.google.com/\">here</A>.\r\n</BODY></HTML>\r\n"
     http_version: HTTP/1.1
-recorded_with: V.CR 0.1.0
+recorded_with: HI8.CR 0.1.0

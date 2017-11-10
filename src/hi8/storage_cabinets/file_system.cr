@@ -25,6 +25,11 @@ module HI8
         File.read(path) if path && File.exists?(path)
       end
 
+      def delete(file_name)
+        path = absolute_path_to_file(file_name)
+        FileUtil.rm(path) if path && File.exists?(path)
+      end
+
       private def absolute_path_to_file(file_name)
         if (storage_location && file_name)
           return File.join(storage_location, file_name)

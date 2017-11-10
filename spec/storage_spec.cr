@@ -7,6 +7,8 @@ module HI8::Cabinet
     def store(file_name, content); end
 
     def watch(file_name); end
+
+    def delete(filename); end
   end
 end
 

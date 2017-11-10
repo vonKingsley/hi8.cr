@@ -20,6 +20,8 @@ module HI8
     cassettes.last
   end
 
+  # This is the main entrypoint for Hi8.cr
+  # Call this with a block to record your HTTP interactions
   def use_cassette(name, options = nil)
     cassette = insert_cassette(name, options)
     begin

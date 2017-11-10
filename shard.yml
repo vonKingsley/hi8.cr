@@ -2,14 +2,13 @@ name: hi8
 version: 0.1.0
 
 authors:
-  - kinglewi <kinglewi@cisco.com>
+  - Kingsley Lewis <vonkingsley@gmail.com>
 
 description: |
   Http Interaction -8- Crystal Recorder
 
 dependencies:
   webmock:
-    github: vonkingsley/webmock.cr
-    branch: callbacks
+    github: manastech/webmock.cr
 
 license: MIT

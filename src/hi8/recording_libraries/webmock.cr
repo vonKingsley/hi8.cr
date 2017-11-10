@@ -65,7 +65,8 @@ module HI8
         header = HTTP::Headers.new
         return header if headers.nil?
         headers.each do |key, val|
-          next if (key == "User-agent" && val == "Crystal") # the Crystal user agent doesn't actually get added until later
+          # the Crystal user agent doesn't actually get added until later
+          next if (key == "User-agent" && val == "Crystal") 
           header.add(key.as(String), val.as(String))
         end
         header
