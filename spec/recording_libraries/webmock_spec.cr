@@ -29,7 +29,7 @@ describe HI8::Library::WebMock do
     res = episodes.first.response
     recording_lib.playback_episode(req, res)
     http_req = HTTP::Request.new(req.method, "/", recording_lib.headers_from_hash(req.headers), req.body)
-    ::WebMock.find_stub(http_req).should be_a WebMock::Stub
+    ::WebMock.find_stub(http_req).class.should eq(WebMock::Stub)
     ::WebMock.reset
   end
 end
