@@ -64,12 +64,13 @@ describe HI8 do
     HI8.use_cassette("query_mcstringerson", {:format_with => :yaml}) do
       request = HTTP::Client.get "http://www.example.net/resource?test=mctesterson&query=string"
       request.status_code.should eq 404
-      request.body.should contain "Example Domain"
+      request.body.should contain "404 - Not Found"
     end
     HI8.use_cassette("query_mcstringerson") do
+      HI8.current_cassette.recorder.recording?.should be_false
       request = HTTP::Client.get "http://www.example.net/resource?test=mctesterson&query=string"
       request.status_code.should eq 404
-      request.body.should contain "Example Domain"
+      request.body.should contain "404 - Not Found"
     end
   end
 
