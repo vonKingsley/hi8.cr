@@ -13,7 +13,7 @@ module HI8
     end
 
     def uri_creator(host, resources)
-      host + resources
+      resources.starts_with?(host) ? resources : host + resources
     end
   end
 
