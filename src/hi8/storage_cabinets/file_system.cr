@@ -3,42 +3,35 @@ module HI8
     class FileSystem
       include Cabinet
 
-      getter storage_location : String
-
       def initialize
-        @storage_location = HI8.configuration.cassette_library_dir
       end
 
-      def storage_location=(dir)
-        Dir.mkdir_p(dir) unless Dir.exists?(dir)
-        @storage_location = Dir.exists?(dir) ? absolute_path_for(dir) : "."
+      def store(file_name : String, content)
+        abso_path = absolute_path_to_file(file_name)
+        create_path(abso_path)
+        File.write(abso_path, content) if abso_path && File.exists?(File.dirname(abso_path))
       end
 
-      def store(file_name, content)
-        self.storage_location = HI8.configuration.cassette_library_dir
-        path = absolute_path_to_file(file_name)
-        File.write(path, content) if path && File.exists?(File.dirname(path))
-      end
-
-      def watch(file_name)
+      def watch(file_name : String)
         path = absolute_path_to_file(file_name)
         File.read(path) if path && File.exists?(path)
       end
 
-      def delete(file_name)
+      def delete(file_name : String)
         path = absolute_path_to_file(file_name)
         FileUtil.rm(path) if path && File.exists?(path)
       end
 
       private def absolute_path_to_file(file_name)
-        if (storage_location && file_name)
-          return File.join(storage_location, file_name)
-        end
-        nil
+        File.join(HI8.configuration.cabinet_shelf, file_name)
       end
 
       private def absolute_path_for(path)
         Dir.cd(path) { Dir.current }
+      end
+
+      private def create_path(absolute)
+        Dir.mkdir_p(File.dirname(absolute)) unless Dir.exists?(File.dirname(absolute))
       end
     end
   end

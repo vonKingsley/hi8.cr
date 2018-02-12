@@ -1,10 +1,10 @@
 module HI8
   class Configuration
-    property cassette_library_dir : String
+    property cabinet_shelf : String
     getter default_cassette_options
 
     def initialize
-      @cassette_library_dir = "./fixtures/cassettes"
+      @cabinet_shelf = "./fixtures/cassettes"
       @default_cassette_options = {
         :record_mode => :once,
         :record_with => :webmock,
@@ -13,8 +13,18 @@ module HI8
       }
     end
 
-    def default_cassette_options=(opts)
-      @default_cassette_options.merge!(opts)
+    def cassette_library_dir=(dir)
+      puts "cassette_library_dir is deprecated use cabinet_shelf"
+      @cabinet_shelf = dir
     end
+
+    def cassette_library_dir
+      puts "cassette_library_dir is deprecated use cabinet_shelf"
+      @cabinet_shelf
+    end
+
+    #def default_cassette_options=(opts)
+    #  @default_cassette_options.merge!(opts)
+    #end
   end
 end

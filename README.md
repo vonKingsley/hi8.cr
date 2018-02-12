@@ -25,7 +25,7 @@ development_dependencies:
 ### Configure HI8
 ```crystal
 HI8.configure do |config|
-  config.cassette_library_dir = "./test_dir/cassettes"
+  config.cabinet_shelf = "./test_dir/cassettes"
 end
 ```
 
