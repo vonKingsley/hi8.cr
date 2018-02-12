@@ -23,7 +23,7 @@ module HI8
       end
 
       private def absolute_path_to_file(file_name)
-        File.join(HI8.configuration.cabinet_shelf, file_name)
+        File.expand_path(File.join(HI8.configuration.cabinet_shelf, file_name))
       end
 
       private def absolute_path_for(path)
