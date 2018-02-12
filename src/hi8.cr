@@ -36,7 +36,6 @@ module HI8
     #  if cassettes.any? {|c| c.name = name }
     #    raise ArgumentError.new("The cassette #{name} already exisits")
     #  end
-
     cassette = Cassette.new(name, options)
     cassettes << cassette
   end

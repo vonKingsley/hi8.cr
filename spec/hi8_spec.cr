@@ -2,7 +2,7 @@ require "./spec_helper"
 require "file_utils"
 
 Spec.after_each do
-  dir = HI8.configuration.cassette_library_dir
+  dir = HI8.configuration.cabinet_shelf
   match = dir.match(/(\.\/.*)\//)
   if match
     del_dir = match[0]
@@ -13,9 +13,9 @@ end
 describe HI8 do
   it "takes a configuration block" do
     HI8.configure do |config|
-      config.cassette_library_dir = "./test_dir/cassettes"
+      config.cabinet_shelf = "./test_dir/cassettes"
     end
-    HI8.configuration.cassette_library_dir.should eq "./test_dir/cassettes"
+    HI8.configuration.cabinet_shelf.should eq "./test_dir/cassettes"
   end
 
   it "takes a use_cassette block" do
@@ -42,7 +42,7 @@ describe HI8 do
       request.body.should contain "Example Domain"
       request.status_code.should eq 200
     end
-    File.exists?(HI8.configuration.cassette_library_dir + "/json_mctesterson.json").should be_true
+    File.exists?(File.expand_path(File.join(HI8.configuration.cabinet_shelf, "json_mctesterson.json"))).should be_true
   end
 
   it "replays a cassette" do
@@ -64,13 +64,15 @@ describe HI8 do
     HI8.use_cassette("query_mcstringerson", {:format_with => :yaml}) do
       request = HTTP::Client.get "http://www.example.net/resource?test=mctesterson&query=string"
       request.status_code.should eq 404
-      request.body.should contain "404 - Not Found"
+      #for me this still shows exampel doemain even with the 404
+      request.body.should contain "Example Domain"
     end
     HI8.use_cassette("query_mcstringerson") do
       HI8.current_cassette.recorder.recording?.should be_false
       request = HTTP::Client.get "http://www.example.net/resource?test=mctesterson&query=string"
       request.status_code.should eq 404
-      request.body.should contain "404 - Not Found"
+      #for me this still shows exampel doemain even with the 404
+      request.body.should contain "Example Domain"
     end
   end
 
