@@ -1,16 +1,10 @@
 require "../spec_helper"
 
 Spec.after_each do
-  dir = HI8.configuration.cabinet_shelf
-  match = dir.match(/(\.\/.*)\//)
-  if match
-    del_dir = match[0]
-    FileUtils.rm_r(del_dir) if Dir.exists?(del_dir)
-  end
+  empty_cabinet_shelf
 end
 
 describe HI8::Cabinet::FileSystem do
-
   it "stores a file" do
     shelf = "named.json"
     fs = HI8::Cabinet::FileSystem.new
@@ -45,5 +39,4 @@ describe HI8::Cabinet::FileSystem do
     fs.store(shelf, "")
     File.exists?(File.expand_path(File.join(HI8.configuration.cabinet_shelf, shelf))).should be_true
   end
-
 end
