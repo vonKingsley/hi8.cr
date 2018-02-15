@@ -1,7 +1,10 @@
+require "./recording_libraries/library"
+
 module HI8
   class Configuration
     property cabinet_shelf : String
     getter default_cassette_options
+    getter playback_block : HI8::Library::PlaybackBlockType?
 
     def initialize
       @cabinet_shelf = "./fixtures/cassettes"
@@ -23,8 +26,11 @@ module HI8
       @cabinet_shelf
     end
 
-    #def default_cassette_options=(opts)
-    #  @default_cassette_options.merge!(opts)
-    #end
+    def on_playback(&@playback_block : HI8::Library::PlaybackBlockType)
+    end
+
+    def remove_playback_block!
+      @playback_block = nil if @playback_block
+    end
   end
 end

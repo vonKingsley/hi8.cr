@@ -12,6 +12,10 @@ module HI8
     @@configuration ||= Configuration.new
   end
 
+  def reset_configuration!
+    @@configuration = Configuration.new
+  end
+
   def cassettes
     @@cassettes ||= Array(Cassette).new
   end
@@ -37,7 +41,13 @@ module HI8
     #    raise ArgumentError.new("The cassette #{name} already exisits")
     #  end
     cassette = Cassette.new(name, options)
-    cassettes << cassette
+    playback_block = configuration.playback_block
+    if playback_block
+      cassette.recorder.on_playback(&playback_block)
+    else
+      cassette.recorder.remove_playback_block!
+    end
+    cassettes << cassette.insert!
   end
 
   def eject_cassette

@@ -26,6 +26,11 @@ module HI8
       end
 
       def playback_episode(request, response)
+        if @playback_block
+          @playback_block.try(&.call(self, request, response))
+          return
+        end
+
         uri = uri_parse(request.uri)
         method = request.method
         url = url_builder(uri)
@@ -66,7 +71,7 @@ module HI8
         return header if headers.nil?
         headers.each do |key, val|
           # the Crystal user agent doesn't actually get added until later
-          next if (key == "User-agent" && val == "Crystal") 
+          next if (key == "User-agent" && val == "Crystal")
           header.add(key.as(String), val.as(String))
         end
         header

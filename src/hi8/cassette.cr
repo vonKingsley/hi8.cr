@@ -21,7 +21,6 @@ module HI8
     # The record mode for this cassette
     property record_mode
 
-
     getter recorder, format, storage
 
     def initialize(@name : String, options : Hash? = nil)
@@ -31,10 +30,9 @@ module HI8
       @format = HI8.formats[@options[:format_with]]
       @storage = HI8.storage[@options[:store_with]]
       @recorder = HI8.recorders[@options[:record_with]]
-      set_record_or_playback
     end
 
-    private def set_record_or_playback
+    def insert!
       playback = @storage.watch(label)
       if playback
         @recorder.playback
@@ -42,6 +40,7 @@ module HI8
       else
         @recorder.record
       end
+      self
     end
 
     # label returns the name of the casette on disk
@@ -53,7 +52,7 @@ module HI8
       {
         :episodes      => episodes_to_record.map(&.to_hash),
         :recorded_with => "HI8.CR #{HI8.version}",
-        :recorded_at   => Time.now.to_s
+        :recorded_at   => Time.now.to_s,
       } of Symbol => String | Array(Hash(Symbol, Hash(Symbol, String | Hash(String, String))))
     end
 
