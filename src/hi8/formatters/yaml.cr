@@ -1,35 +1,35 @@
 require "yaml"
 
 class Request
-  YAML.mapping(
-    method: String,
-    uri: String,
-    body: String,
-    headers: Hash(String, String)
-  )
+  include YAML::Serializable
+
+  property method : String
+  property uri : String
+  property body : String
+  property headers : Hash(String, String)
 end
 
 class Response
-  YAML.mapping(
-    status: String,
-    headers: Hash(String, String),
-    body: String,
-    http_version: String
-  )
+  include YAML::Serializable
+
+  property status : String
+  property headers : Hash(String, String)
+  property body : String
+  property http_version : String
 end
 
 class Episode
-  YAML.mapping(
-    request: Request,
-    response: Response
-  )
+  include YAML::Serializable
+
+  property request : Request
+  property response : Response
 end
 
 class Episodes
-  YAML.mapping(
-    episodes: Array(Episode),
-    recorded_with: String
-  )
+  include YAML::Serializable
+
+  property episodes : Array(Episode)
+  property recorded_with : String
 end
 
 module HI8

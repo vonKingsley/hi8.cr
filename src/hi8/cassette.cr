@@ -52,7 +52,7 @@ module HI8
       {
         :episodes      => episodes_to_record.map(&.to_hash),
         :recorded_with => "HI8.CR #{HI8.version}",
-        :recorded_at   => Time.now.to_s,
+        :recorded_at   => Time.local.to_s,
       } of Symbol => String | Array(Hash(Symbol, Hash(Symbol, String | Hash(String, String))))
     end
 

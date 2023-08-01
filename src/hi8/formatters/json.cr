@@ -1,35 +1,35 @@
 require "json"
 
 class Request
-  JSON.mapping(
-    method: String,
-    uri: String,
-    body: String,
-    headers: Hash(String, String)
-  )
+  include JSON::Serializable
+
+  property method : String
+  property uri : String
+  property body : String
+  property headers : Hash(String, String)
 end
 
 class Response
-  JSON.mapping(
-    status: String,
-    headers: Hash(String, String),
-    body: String,
-    http_version: String
-  )
+  include JSON::Serializable
+
+  property status : String
+  property headers : Hash(String, String)
+  property body : String
+  property http_version : String
 end
 
 class Episode
-  JSON.mapping(
-    request: Request,
-    response: Response
-  )
+  include JSON::Serializable
+
+  property request : Request
+  property response : Response
 end
 
 class Episodes
-  JSON.mapping(
-    episodes: Array(Episode),
-    recorded_with: String
-  )
+  include JSON::Serializable
+
+  property episodes : Array(Episode)
+  property recorded_with : String
 end
 
 module HI8
@@ -45,10 +45,10 @@ module HI8
         hash.to_json
       end
 
-      def deserialize(string : String)
-        if string
-          Episodes.from_json(string)
-        end
+      def deserialize(string)
+        return unless string
+
+        Episodes.from_json(string)
       end
     end
   end
